@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+                <strong>{{message|safe}}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+        {{plaintext}}
+        {% if tasks %}
+        <div>
+            Current scheduled tasks
+            <table>
+                <tr>
+                    <th>Verbose name</th>
+                    <th>name</th>
+                    <th>Ran at</th>
+                    <th>attempts</th>
+                    <th>queue</th>
+                    <th>parameters</th>
+                </tr>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{task.verbose_name}}</td>
+                        <td>{{task.task_name}}</td>
+                        <td>{{task.run_at}}</td>
+                        <td>{{task.attempts}}</td>
+                        <td>{{task.queue}}</td>
+                        <td>{{task.task_params}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+
+        {% if displayform == True %}
+        <div>
+            Submit form to upload
+        <br>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="checkbox" name="runbg" value="Run file process in background" checked>Run in Background?</input><br>
+            <label for="text1"> Rename upload process</label>
+            <input type="text" id="text1" name="name" value="Upload File"><br>
+            <label for="file1"> Add file</label>
+            <input type="file" id="file1" name="file"><br>
+            <button type="submit">Upload</button>
+        </form>
+        </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

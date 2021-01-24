@@ -1,0 +1,11 @@
+DB Browser (SQlite)
+
+Instal background tasks:
+pip install django-background-tasks
+
+To run background task checker use the command:
+python manage.py process_tasks
+
+Users:
+CalvinTest
+mymzjzjx
